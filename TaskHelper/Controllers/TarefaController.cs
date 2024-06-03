@@ -50,6 +50,19 @@ namespace TaskHelper.Controllers
             return Ok(tarefa);
         }
 
+        [HttpDelete("{Id}")]
+        public IActionResult DeletarPeloId(int Id)
+        {
+            var tarefa = _context.Tarefas.Find(Id);
+
+            if (tarefa == null) return NotFound();
+
+            _context.Remove(tarefa);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
