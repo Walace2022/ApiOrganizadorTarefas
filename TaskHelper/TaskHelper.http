@@ -1,0 +1,6 @@
+@TaskHelper_HostAddress = http://localhost:5273
+
+GET {{TaskHelper_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
