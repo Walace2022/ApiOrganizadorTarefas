@@ -22,13 +22,30 @@ namespace TaskHelper.Controllers
             return Ok(tarefas);
         }
 
-        [HttpGet("OpterPorId")]
+        [HttpGet("{Id}")]
         public IActionResult ObterPeloId(int Id)
         {
             var tarefa = _context.Tarefas.Find(Id);
 
             if(tarefa == null) return NotFound();
 
+
+            return Ok(tarefa);
+        }
+
+        [HttpPut("{Id}")]
+        public IActionResult AtualizarPeloId(int Id,Tarefa tarefaAtualizada)
+        {
+            var tarefa = _context.Tarefas.Find(Id);
+
+            if (tarefa == null) return NotFound();
+
+            tarefa.Titulo = tarefaAtualizada.Titulo;
+            tarefa.Descricao = tarefaAtualizada.Descricao;
+            tarefa.Status = tarefaAtualizada.Status;
+
+            _context.Update(tarefa);
+            _context.SaveChanges();
 
             return Ok(tarefa);
         }
