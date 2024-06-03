@@ -22,6 +22,17 @@ namespace TaskHelper.Controllers
             return Ok(tarefas);
         }
 
+        [HttpGet("OpterPorId")]
+        public IActionResult ObterPeloId(int Id)
+        {
+            var tarefa = _context.Tarefas.Find(Id);
+
+            if(tarefa == null) return NotFound();
+
+
+            return Ok(tarefa);
+        }
+
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
