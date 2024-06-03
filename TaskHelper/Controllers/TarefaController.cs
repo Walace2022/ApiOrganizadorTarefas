@@ -42,6 +42,16 @@ namespace TaskHelper.Controllers
             return Ok(tarefas);
         }
 
+        [HttpGet("ObterPorStatus")]
+        public IActionResult ObterPorData(EnumStatusTarefa status)
+        {
+            var tarefas = _context.Tarefas.Where(x => x.Status == status);
+
+            if (tarefas.Count() == 0) return NotFound("Nenhuma tarefa encontrada.");
+
+            return Ok(tarefas);
+        }
+
         [HttpGet("{Id}")]
         public IActionResult ObterPeloId(int Id)
         {
