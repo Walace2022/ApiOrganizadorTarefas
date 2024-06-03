@@ -32,6 +32,16 @@ namespace TaskHelper.Controllers
             return Ok(tarefas);
         }
 
+        [HttpGet("ObterPorData")]
+        public IActionResult ObterPorData(DateTime data)
+        {
+            var tarefas = _context.Tarefas.Where(x => x.Data.Date == data.Date);
+
+            if (tarefas.Count() == 0) return NotFound("Nenhuma tarefa encontrada.");
+
+            return Ok(tarefas);
+        }
+
         [HttpGet("{Id}")]
         public IActionResult ObterPeloId(int Id)
         {
