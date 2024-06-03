@@ -22,6 +22,16 @@ namespace TaskHelper.Controllers
             return Ok(tarefas);
         }
 
+        [HttpGet("ObterPorTitulo")]
+        public IActionResult ObterPorTitulo(string titulo) 
+        {
+            var tarefas = _context.Tarefas.Where(x => x.Titulo.Contains(titulo));
+
+            if (tarefas.Count() == 0) return NotFound("Nenhuma tarefa encontrada.");
+
+            return Ok(tarefas);
+        }
+
         [HttpGet("{Id}")]
         public IActionResult ObterPeloId(int Id)
         {
@@ -31,6 +41,14 @@ namespace TaskHelper.Controllers
 
 
             return Ok(tarefa);
+        }
+
+        [HttpPost]
+        public IActionResult CriarTarefa(Tarefa tarefa)
+        {
+            _context.Add(tarefa);
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPut("{Id}")]
@@ -63,12 +81,5 @@ namespace TaskHelper.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult CriarTarefa(Tarefa tarefa)
-        {
-            _context.Add(tarefa);
-            _context.SaveChanges();
-            return Ok();
-        }
     }
 }
