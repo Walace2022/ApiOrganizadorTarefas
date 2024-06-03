@@ -15,6 +15,13 @@ namespace TaskHelper.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult ObterTodasTarefas()
+        {
+            var tarefas = _context.Tarefas;
+            return Ok(tarefas);
+        }
+
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
